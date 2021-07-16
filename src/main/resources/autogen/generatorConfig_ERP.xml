@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!-- 驱动  -->
+    <classPathEntry location="/Users/hongweisun/Development/JavaDev/MES-ERPU9/src/main/resources/autogen/mssql-jdbc-9.2.1.jre8.jar"/>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 连接信息 -->
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                        connectionURL="jdbc:sqlserver://127.0.0.1;databasename=ERP"
+                        userId="sa"
+                        password="1qaz1QAZ">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- javaModel -->
+        <javaModelGenerator targetPackage="com.elus.repository.model.ERP"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- mapper -->
+        <sqlMapGenerator targetPackage="ERP"
+                         targetProject="src/main/resources/mapper">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.elus.repository.mapper.ERP"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!-- 表信息 -->
+        <table tableName="ERP_BOM" domainObjectName="ErpBom">
+            <generatedKey column="MATERIAL_ID" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="MATERIAL_CODE" javaType="String"/>
+            <columnOverride column="MATERIAL_SPECIFICATION" javaType="String"/>
+            <columnOverride column="MATERIAL_NAME" javaType="String"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

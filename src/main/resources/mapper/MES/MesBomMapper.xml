@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elus.repository.mapper.MES.MesBomMapper">
+  <resultMap id="BaseResultMap" type="com.elus.repository.model.MES.MesBom">
+    <id column="MATERIAL_ID" jdbcType="VARCHAR" property="materialId" />
+    <result column="MATERIAL_CODE" jdbcType="VARCHAR" property="materialCode" />
+    <result column="MATERIAL_SPECIFICATION" jdbcType="VARCHAR" property="materialSpecification" />
+    <result column="MATERIAL_NAME" jdbcType="VARCHAR" property="materialName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MATERIAL_ID, MATERIAL_CODE, MATERIAL_SPECIFICATION, MATERIAL_NAME
+  </sql>
+  <select id="selectByExample" parameterType="com.elus.repository.model.MES.MesBomExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MES_BOM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from MES_BOM
+    where MATERIAL_ID = #{materialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from MES_BOM
+    where MATERIAL_ID = #{materialId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elus.repository.model.MES.MesBomExample">
+    delete from MES_BOM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="MATERIAL_ID" keyProperty="materialId" parameterType="com.elus.repository.model.MES.MesBom" useGeneratedKeys="true">
+    insert into MES_BOM (MATERIAL_CODE, MATERIAL_SPECIFICATION, 
+      MATERIAL_NAME)
+    values (#{materialCode,jdbcType=VARCHAR}, #{materialSpecification,jdbcType=VARCHAR}, 
+      #{materialName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="MATERIAL_ID" keyProperty="materialId" parameterType="com.elus.repository.model.MES.MesBom" useGeneratedKeys="true">
+    insert into MES_BOM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="materialCode != null">
+        MATERIAL_CODE,
+      </if>
+      <if test="materialSpecification != null">
+        MATERIAL_SPECIFICATION,
+      </if>
+      <if test="materialName != null">
+        MATERIAL_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="materialCode != null">
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialSpecification != null">
+        #{materialSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null">
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elus.repository.model.MES.MesBomExample" resultType="java.lang.Long">
+    select count(*) from MES_BOM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update MES_BOM
+    <set>
+      <if test="record.materialId != null">
+        MATERIAL_ID = #{record.materialId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialCode != null">
+        MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialSpecification != null">
+        MATERIAL_SPECIFICATION = #{record.materialSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null">
+        MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update MES_BOM
+    set MATERIAL_ID = #{record.materialId,jdbcType=VARCHAR},
+      MATERIAL_CODE = #{record.materialCode,jdbcType=VARCHAR},
+      MATERIAL_SPECIFICATION = #{record.materialSpecification,jdbcType=VARCHAR},
+      MATERIAL_NAME = #{record.materialName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elus.repository.model.MES.MesBom">
+    update MES_BOM
+    <set>
+      <if test="materialCode != null">
+        MATERIAL_CODE = #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialSpecification != null">
+        MATERIAL_SPECIFICATION = #{materialSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null">
+        MATERIAL_NAME = #{materialName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MATERIAL_ID = #{materialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elus.repository.model.MES.MesBom">
+    update MES_BOM
+    set MATERIAL_CODE = #{materialCode,jdbcType=VARCHAR},
+      MATERIAL_SPECIFICATION = #{materialSpecification,jdbcType=VARCHAR},
+      MATERIAL_NAME = #{materialName,jdbcType=VARCHAR}
+    where MATERIAL_ID = #{materialId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.elus.repository.model.MES.MesBomExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MES_BOM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

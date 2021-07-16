@@ -1,0 +1,20 @@
+server:
+  servlet:
+    context-path: /MES-ERP
+  port: 8888
+
+# MES 数据源
+master:
+  datasource:
+    url: jdbc:sqlserver://127.0.0.1;databasename=MES
+    username: sa
+    password: 1qaz1QAZ
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+# ERP 数据源
+slave:
+  datasource:
+    url: jdbc:sqlserver://127.0.0.1;databasename=ERP
+    username: sa
+    password: 1qaz1QAZ
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver

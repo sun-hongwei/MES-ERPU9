@@ -1,0 +1,29 @@
+create database ERP;
+--修改数据库为但用户模式
+ALTER DATABASE ERP SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+--修改数据库为多用户模式
+ALTER DATABASE ERP SET MULTI_USER;
+--修改数据库字符集
+alter database ERP collate Chinese_PRC_CI_AS;
+GO
+USE ERP
+GO
+create table ERP_MATERIAL
+(
+    MATERIAL_ID            varchar(100) primary key ,
+    MATERIAL_CODE          varchar(50),
+    MATERIAL_SPECIFICATION varchar(150),
+    MATERIAL_NAME          varchar(255)
+)
+go
+create table ERP_MATERIAL_H
+(
+    MATERIAL_ID            varchar(100),
+    MATERIAL_CODE          varchar(50),
+    MATERIAL_SPECIFICATION varchar(150),
+    MATERIAL_NAME          varchar(255)
+)
+GO
+
+INSERT INTO ERP.dbo.ERP_MATERIAL (MATERIAL_ID, MATERIAL_CODE, MATERIAL_SPECIFICATION, MATERIAL_NAME) VALUES (N'5c84249d72815fcd3f9cb667dc306f48', N'WL_QWERTY', N'高逼格', N'战斗机');
+INSERT INTO ERP.dbo.ERP_MATERIAL (MATERIAL_ID, MATERIAL_CODE, MATERIAL_SPECIFICATION, MATERIAL_NAME) VALUES (N'd4312c057f6ec678c039c2b769e9756b', N'WL_QWERJGH', N'高逼格', N'预警机');
